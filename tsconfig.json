@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "noEmit": true,
+    "checkJs": true,
+    "target": "ES2022",
+    "module": "ES2022",
+    "lib": ["ES2022", "DOM"],
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "noImplicitAny": false,
+    "moduleResolution": "node",
+    "allowImportingTsExtensions": true,
+    "strict": true,
+  },
+  "include": ["app"]
+}
