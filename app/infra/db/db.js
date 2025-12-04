@@ -5,6 +5,7 @@ import { Pool } from 'pg';
  */
 
 const DB_CONNECTION_STRING = process.env.DB_CONNECTION_STRING ?? '';
+if (!DB_CONNECTION_STRING) throw new Error('Some error message...');
 
 /**
  * @function initDb

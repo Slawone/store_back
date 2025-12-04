@@ -14,5 +14,7 @@ import { initController as initPhoneController } from './services/phone/controll
 
 export const initController = (diContainer) => {
   const phoneRoutes = initPhoneController(diContainer);
-  return [...phoneRoutes];
+  return [
+    ...phoneRoutes,
+  ];
 };

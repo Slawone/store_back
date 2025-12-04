@@ -1,13 +1,14 @@
 {
   "name": "store",
-  "version": "1.0.0",
   "description": "",
-  "license": "ISC",
   "author": "",
   "type": "module",
   "main": "main.js",
   "scripts": {
-    "dev": "node --env-file=.env app/main.js"
+    "dev": "node --env-file=.env app/main.js",
+    "test": "",
+    "lint": "eslint app",
+    "ts": "tsc app"
   },
   "devDependencies": {
     "@types/pg": "^8.15.6",

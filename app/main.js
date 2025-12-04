@@ -4,7 +4,7 @@ import { diContainer } from './diContainer.js';
 
 const serverOpts = {
   logger: true,
-}
+};
 
 const server = createServer(serverOpts);
 const routes = initController(diContainer);
