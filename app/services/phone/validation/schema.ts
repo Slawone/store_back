@@ -1,3 +1,7 @@
+/**********************************************
+  Context
+**********************************************/
+
 const NAME = {
   type: 'string',
   minLength: 2,
@@ -20,15 +24,19 @@ const ID = {
   minLength: 1,
 };
 
-const BRANDID = {
+const BRAND_ID = {
   type: 'number',
   minimum: 1,
 };
 
+/**********************************************
+  Common
+**********************************************/
+
 const phoneSchema = {
   type: 'object',
   properties: {
-    brandId: BRANDID,
+    brandId: BRAND_ID,
     name: NAME,
     description: DESCRIPTION,
     price: PRICE,
@@ -51,7 +59,13 @@ const idSchema = {
   maxProperties: 1,
 };
 
+/**********************************************
+  Schema
+**********************************************/
+
 export const schema = {
   phone: phoneSchema,
   id: idSchema,
 };
+
+/*********************************************/

@@ -3,8 +3,8 @@ import { schema } from './validation/schema.ts';
 /**
  * @typedef {import('./types').DiContainer} DiContainer
  * @typedef {import('./types').RouteOpts} RouteOpts
- * @typedef {import('./types').PhoneForDb} CreatePhoneData
- * @typedef {import('./types').PhoneFromDb} PhoneData
+ * @typedef {import('./types').PhoneForDb} PhoneForDb
+ * @typedef {import('./types').PhoneFromDb} PhoneFromDb
  */
 
 /**
@@ -15,7 +15,7 @@ import { schema } from './validation/schema.ts';
  */
 
 export const initController = (diContainer) => {
-  const phoneService = diContainer.service.phone;
+  const service = diContainer.service.phone;
 
   return [
     /**
@@ -27,8 +27,8 @@ export const initController = (diContainer) => {
     {
       method: 'GET',
       url: '/phones',
-      handler: async (req, reply) => {
-        const phones = await phoneService.getAllPhones();
+      handler: async (_, reply) => {
+        const phones = await service.getPhones();
         reply.send({ phones });
       },
     },
@@ -48,7 +48,7 @@ export const initController = (diContainer) => {
       handler: async (req, reply) => {
         const /** @type {object} */ reqParams = req.params;
         const /** @type {string} */ id = reqParams.id;
-        const phone = await phoneService.getPhoneById(id);
+        const phone = await service.getPhoneById(id);
         reply.send({ phone });
       },
     },
@@ -67,9 +67,9 @@ export const initController = (diContainer) => {
       },
       handler: async (req, reply) => {
         const /** @type {object} */ reqBody = req.body;
-        const /** @type {CreatePhoneData} */ phoneData = reqBody;
-        const newPhone = await phoneService.createPhone(phoneData);
-        reply.send(newPhone);
+        const /** @type {PhoneForDb} */ phoneForCreate = reqBody;
+        const createdPhone = await service.createPhone(phoneForCreate);
+        reply.send({ createdPhone });
       },
     },
 
@@ -88,11 +88,11 @@ export const initController = (diContainer) => {
       },
       handler: async (req, reply) => {
         const /** @type {object} */ reqParams = req.params;
-        const /** @type {string} */ id = reqParams.id;
+        const /** @type {string} */ phoneId = reqParams.id;
         const /** @type {object} */ reqBody = req.body;
-        const /** @type {CreatePhoneData} */ phoneData = reqBody;
-        const updatePhone = await phoneService.updatePhone(id, phoneData);
-        reply.send(updatePhone);
+        const /** @type {PhoneForDb} */ phoneForUpdate = reqBody;
+        const updatedPhone = await service.updatePhone(phoneId, phoneForUpdate);
+        reply.send({ updatedPhone });
       },
     },
 
@@ -110,8 +110,8 @@ export const initController = (diContainer) => {
       },
       handler: async (req, reply) => {
         const /** @type {object} */ reqParams = req.params;
-        const /** @type {string} */ id = reqParams.id;
-        const deletedPhone = await phoneService.deletePhone(id);
+        const /** @type {string} */ phoneId = reqParams.id;
+        const deletedPhone = await service.deletePhone(phoneId);
         reply.send({ deletedPhone });
       },
     },

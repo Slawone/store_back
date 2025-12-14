@@ -24,7 +24,7 @@ const phoneService = initPhoneService(phoneDeps);
 
 const service = {
   phone: phoneService,
-}
+};
 
 /********************************************
   DiContainer

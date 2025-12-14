@@ -6,8 +6,8 @@ export type PhoneForDb = {
 };
 
 export type PhoneFromDb = {
-  brandId: number,
   id: number;
+  brandId: number;
   name: string;
   description?: string;
   price: number;

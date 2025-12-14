@@ -1,84 +1,74 @@
-import { toPartial } from '../../utils/transforms/toPartial.js';
+import { toPartial } from '../../utils/transforms.js';
 import { Model } from './model.js';
 
 /**
- * @typedef {import('./types').PhoneForDb} CreatePhoneData
- * @typedef {import('./types').PhoneFromDb} PhoneData
+ * @typedef {import('./types').PhoneForDb} PhoneForDb
+ * @typedef {import('./types').PhoneFromDb} PhoneFromDb
  * @typedef {import('./types').Service} Service
- * @typedef {import('./types').Infra} PhoneProps
- * @typedef {import('./types').PhoneDeps} PhoneDeps
+ * @typedef {import('./types').Props} Props
+ * @typedef {import('./types').Deps} Deps
  */
 
 /**
- * @function getAllPhones
- * @description Функция получает все телефоны из БД
- * @param {PhoneDeps} deps
- * @returns {Promise<PhoneData[]>}
+ * @function getPhones
+ * @param {Deps} deps
+ * @returns {Promise<PhoneFromDb[]>}
  */
 
-const getAllPhones = async (deps) => {
+const getPhones = async (deps) => {
   const phones = await deps.model.getPhones();
   return phones;
 };
 
 /**
  * @function getPhoneById
- * @description Получает один телефон по ID
- * @param {PhoneDeps} deps
+ * @param {Deps} deps
  * @param {string} id
- * @returns {Promise<PhoneData | undefined>}
+ * @returns {Promise<PhoneFromDb | null>}
  */
 
 const getPhoneById = async (deps, id) => {
-  const phone = await deps.model.getPhoneById(id);
-  return phone;
-}
+  return deps.model.getPhoneById(id);
+};
 
 /**
  * @function createPhone
- * @description Создает новый телефон в БД
- * @param {PhoneDeps} deps
- * @param {CreatePhoneData} phoneForCreate
- * @returns {Promise<PhoneData>}
+ * @param {Deps} deps
+ * @param {PhoneForDb} phoneForCreate
+ * @returns {Promise<PhoneFromDb>}
  */
 
 const createPhone = (deps, phoneForCreate) => {
-  const phone = deps.model.createPhone(phoneForCreate);
-  return phone;
-}
+  return deps.model.createPhone(phoneForCreate);
+};
 
 /**
  * @function updatePhone
- * @description Обновляет существующий телефон
- * @param {PhoneDeps} deps
+ * @param {Deps} deps
  * @param {string} id
- * @param {PhoneData} phoneData
- * @returns {Promise<PhoneData | undefined>}
+ * @param {PhoneFromDb} phoneFromDb
+ * @returns {Promise<PhoneFromDb | null>}
  */
 
-const updatePhone = async (deps, id, phoneData) => {
-  const updatedPhone = await deps.model.updatePhone(id, phoneData);
-  return updatedPhone;
+const updatePhone = async (deps, id, phoneFromDb) => {
+  return deps.model.updatePhone(id, phoneFromDb);
 };
 
 /**
  * @function deletePhone
- * @description Удаляет телефон из БД
- * @param {PhoneDeps} deps
+ * @param {Deps} deps
  * @param {string} id
- * @returns {Promise<PhoneData | undefined>}
+ * @returns {Promise<PhoneFromDb | null>}
  */
 
 const deletePhone = async (deps, id) => {
-  const deletedPhone = await deps.model.deletePhone(id);
-  return deletedPhone;
+  return deps.model.deletePhone(id);
 };
 
 /**
  * @function initDeps
- * @description Инициализирует зависимости для сервиса
- * @param {PhoneProps} props
- * @returns {PhoneDeps}
+ * @param {Props} props
+ * @returns {Deps}
  */
 
 export const initDeps = (props) => ({
@@ -87,15 +77,14 @@ export const initDeps = (props) => ({
 
 /**
  * @function initService
- * @description Инициализирует сервис - "зашивает" deps в функции
- * @param {PhoneDeps} deps
+ * @param {Deps} deps
  * @returns {Service}
  */
 
 export const initService = (deps) => ({
-  getAllPhones: toPartial(getAllPhones, deps),
-  getPhoneById: toPartial(getPhoneById, deps),
-  createPhone: toPartial(createPhone, deps),
-  updatePhone: toPartial(updatePhone, deps),
-  deletePhone: toPartial(deletePhone, deps),
+  'getPhones': toPartial(getPhones, deps),
+  'getPhoneById': toPartial(getPhoneById, deps),
+  'createPhone': toPartial(createPhone, deps),
+  'updatePhone': toPartial(updatePhone, deps),
+  'deletePhone': toPartial(deletePhone, deps),
 });
