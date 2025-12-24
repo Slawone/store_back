@@ -1,17 +1,18 @@
 {
   "name": "store",
-  "description": "",
-  "author": "",
   "type": "module",
   "main": "main.js",
   "scripts": {
-    "dev": "node --env-file=.env app/main.js",
+    "dev": "nodemon --watch app --ext js,ts --exec \"tsx --env-file=.env app/main.js\"",
     "test": "",
-    "lint": "eslint app",
-    "ts": "tsc app"
+    "lint": "eslint app"
   },
   "devDependencies": {
     "@types/pg": "^8.15.6",
+    "eslint": "^9.39.2",
+    "eslint-plugin-prettier": "^5.5.4",
+    "nodemon": "^3.1.11",
+    "tsx": "^4.21.0",
     "typescript": "^5.9.3"
   },
   "dependencies": {
@@ -19,3 +20,4 @@
     "pg": "^8.16.3"
   }
 }
+

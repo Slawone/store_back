@@ -14,6 +14,6 @@ if (!DB_CONNECTION_STRING) throw new Error('Some error message...');
 
 export const initDb = () => {
   const connectionString = DB_CONNECTION_STRING;
-  const dbPool = new Pool({connectionString});
+  const dbPool = new Pool({ connectionString });
   return dbPool;
 };

@@ -77,7 +77,11 @@ export class Model {
    */
 
   async updatePhone(id, phoneForDb) {
-    const sql = 'UPDATE phones SET "brandId" = $2, name = $3, description = $4, price = $5 WHERE id = $1 RETURNING *';
+    const sql = `UPDATE phones SET
+      "brandId" = $2,
+      name = $3, description = $4,
+      price = $5
+      WHERE id = $1 RETURNING *`;
     const values = [
       id,
       phoneForDb.brandId,

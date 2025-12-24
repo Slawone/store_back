@@ -7,13 +7,13 @@ import { initController as initPhoneController } from './services/phone/controll
 
 /**
  * @function initController
- * @description Собирает роуты всех контролеров
  * @param {DiContainer} diContainer
  * @returns {RouteOpts[]}
  */
 
 export const initController = (diContainer) => {
   const phoneRoutes = initPhoneController(diContainer);
+
   return [
     ...phoneRoutes,
   ];

@@ -67,5 +67,3 @@ export const schema = {
   phone: phoneSchema,
   id: idSchema,
 };
-
-/*********************************************/
